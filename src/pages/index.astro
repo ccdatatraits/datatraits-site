@@ -1,37 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const cookie = Astro.request.headers.get('Cookie');
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Web Information">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro with Deno</span></h1>
-		<p class="instructions">
-			Check out the <code>src/pages</code> directory to get started.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Chat"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
+		<h1>Important <span class="text-gradient">Web </span>Info.</h1>
+		<div>
+			<p>{JSON.stringify(Astro.request.headers)}</p>
+			<p><b>Cookie: </b>{cookie}</p>
+			<p><b>Client Address: </b>{Astro.clientAddress}</p>
+			<p><b>Generator: </b>{Astro.generator}</p>
+			<p><b>Params: </b>{JSON.stringify(Astro.params)}</p>
+			<p><b>Props: </b>{JSON.stringify(Astro.props)}</p>
+			<p><b>Request: </b>{JSON.stringify(Astro.request)}</p>
+			<p><b>Response: </b>{JSON.stringify(Astro.response)}</p>
+			<!-- <p><b>Self: </b>{Astro.self}</p> -->
+			<p><b>Site: </b>{Astro.site}</p>
+			<p><b>Slots: </b>{JSON.stringify(Astro.slots)}</p>
+			<p><b>URL: </b>{Astro.url}</p>
+		</div>
 	</main>
 </Layout>
 
