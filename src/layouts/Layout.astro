@@ -4,6 +4,7 @@ export interface Props {
 }
 
 const { title } = Astro.props;
+const xcrawler = Astro.request.headers.get('X-Crawler');
 ---
 
 <!DOCTYPE html>
@@ -17,6 +18,12 @@ const { title } = Astro.props;
 			gtag('js', new Date());
 
 			gtag('config', 'G-0743B996K8');
+		</script>
+		<script>
+			//if ({xcrawler}) {
+				window['ga-disable-G-0743B996K8'] = true;
+			//}
+		
 		</script>
 
 		<meta charset="UTF-8" />
