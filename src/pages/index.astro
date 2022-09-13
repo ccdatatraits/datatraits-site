@@ -2,24 +2,29 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
+const headers = Astro.request.headers;
 const cookie = Astro.request.headers.get('Cookie');
+const xcrawler = Astro.request.headers.get('X-Crawler');
+
+const replacer = function(k, v) { if (v === undefined) { return null; } return v; };
 ---
 
 <Layout title="Web Information">
 	<main>
 		<h1>Important <span class="text-gradient">Web </span>Info.</h1>
 		<div>
-			<p>{JSON.stringify(Astro.request.headers)}</p>
+			<p><b>Headers: </b>{JSON.stringify(headers, replacer)}</p>
 			<p><b>Cookie: </b>{cookie}</p>
+			<p><b>X-Crawler: </b>{xcrawler}</p>
 			<p><b>Client Address: </b>{Astro.clientAddress}</p>
 			<p><b>Generator: </b>{Astro.generator}</p>
-			<p><b>Params: </b>{JSON.stringify(Astro.params)}</p>
-			<p><b>Props: </b>{JSON.stringify(Astro.props)}</p>
-			<p><b>Request: </b>{JSON.stringify(Astro.request)}</p>
-			<p><b>Response: </b>{JSON.stringify(Astro.response)}</p>
+			<p><b>Params: </b>{JSON.stringify(Astro.params, replacer)}</p>
+			<p><b>Props: </b>{JSON.stringify(Astro.props, replacer)}</p>
+			<p><b>Request: </b>{JSON.stringify(Astro.request, replacer)}</p>
+			<p><b>Response: </b>{JSON.stringify(Astro.response, replacer)}</p>
 			<!-- <p><b>Self: </b>{Astro.self}</p> -->
 			<p><b>Site: </b>{Astro.site}</p>
-			<p><b>Slots: </b>{JSON.stringify(Astro.slots)}</p>
+			<p><b>Slots: </b>{JSON.stringify(Astro.slots, replacer)}</p>
 			<p><b>URL: </b>{Astro.url}</p>
 		</div>
 	</main>
