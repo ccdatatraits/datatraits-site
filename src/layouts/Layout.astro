@@ -4,7 +4,7 @@ export interface Props {
 }
 
 const { title } = Astro.props;
-const xcrawler = Astro.request.headers.get('X-Crawler');
+const href = Astro.url.href;
 ---
 
 <!DOCTYPE html>
@@ -19,11 +19,10 @@ const xcrawler = Astro.request.headers.get('X-Crawler');
 
 			gtag('config', 'G-0743B996K8');
 		</script>
-		<script>
-			//if ({xcrawler}) {
-				// window['ga-disable-G-0743B996K8'] = true;
-			//}
-		
+		<script define:vars={{href}}>
+			if (href.indexOf("is_nh") > -1) {
+				window['ga-disable-G-0743B996K8'] = true;
+			}
 		</script>
 
 		<meta charset="UTF-8" />
