@@ -20,7 +20,12 @@ const href = Astro.url.href;
 			gtag('config', 'G-0743B996K8');
 		</script>
 		<script define:vars={{href}}>
-			if (href.indexOf("is_nh") > -1) {
+			function detectNonHumanActivity(fullURL) {
+				let nhTerm = fullURL.match(/mt_nh=([^&]*)/);
+				if (!nhTerm) return false;
+				else return nhTerm[1] !== '' && nhTerm[1] !== '[mt_nh]' && nhTerm[1] !== '%5Bmt_nh%5D';	
+			}
+			if (detectNonHumanActivity(href)) {
 				window['ga-disable-G-0743B996K8'] = true;
 			}
 		</script>
